@@ -1,3 +1,3 @@
-# skyscanner-adaptor
+# flymatcher-itinerary-service
 
-Adaptor for Skyscanner requests
+Itinerary match service

@@ -9,15 +9,15 @@
 		<version>1.0.1</version>
 	</parent>
 
-	<artifactId>skyscanner-adaptor</artifactId>
+	<artifactId>flymatcher-itinerary-service</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
 	<dependencies>
 	
 		<dependency>
 			<groupId>com.flymatcher</groupId>
-			<artifactId>skyscanner-adaptor-api</artifactId>
-			<version>1.0.0</version>
+			<artifactId>flymatcher-itinerary-api</artifactId>
+			<version>1.0.1</version>
 		</dependency>
 		
 		<dependency>
@@ -63,9 +63,9 @@
 	</dependencies>
 	
 		<scm>
-		<connection>scm:git:git//github.com/nsterg/skyscanner-adaptor.git</connection>
-		<url>https://github.com/nsterg/skyscanner-adaptor</url>
-		<developerConnection>scm:git:git@github.com:nsterg/skyscanner-adaptor.git</developerConnection>
+		<connection>scm:git:git//github.com/nsterg/flymatcher-itinerary-service.git</connection>
+		<url>https://github.com/nsterg/flymatcher-itinerary-service</url>
+		<developerConnection>scm:git:git@github.com:nsterg/flymatcher-itinerary-service.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 	
