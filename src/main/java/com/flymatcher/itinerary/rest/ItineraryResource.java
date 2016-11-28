@@ -3,6 +3,7 @@ package com.flymatcher.itinerary.rest;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,9 +26,9 @@ public class ItineraryResource {
       value = {@ApiResponse(code = 200, message = "Success", response = FlightMatch.class)})
   // @formatter:on
   public ResponseEntity<? extends Object> findPriceMatch(
-      @RequestParam("origins") List<String> origins,
-      @RequestParam("outboundDate") String outboundDate,
-      @RequestParam("inboundDate") String inboundDate) {
+      @RequestParam("origins") final List<String> origins,
+      @RequestParam("outboundDate") final String outboundDate,
+      @RequestParam("inboundDate") final String inboundDate) {
     // TODO - invoke service call to handle the request
 
 
@@ -35,15 +36,15 @@ public class ItineraryResource {
 
     match2.setDestination("MILAN");
     match2.setPrice(150);
-    match2.setInboundDate(inboundDate);
-    match2.setOutboundDate(outboundDate);
+    match2.setInboundDate(LocalDate.parse(inboundDate));
+    match2.setOutboundDate(LocalDate.parse(outboundDate));
 
     final FlightMatch match1 = new FlightMatch();
 
     match1.setDestination("PARIS");
     match1.setPrice(100);
-    match1.setInboundDate(inboundDate);
-    match1.setOutboundDate(outboundDate);
+    match1.setInboundDate(LocalDate.parse(inboundDate));
+    match1.setOutboundDate(LocalDate.parse(outboundDate));
 
 
 
