@@ -1,0 +1,21 @@
+{
+  "quotes": [
+    {
+      "price": 62.0,
+      "direct": true,
+      "quoteDate":"2016-08-06T22:01:00",
+      "outboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Athens International",
+        "destination": "Milan Malpensa",
+        "departureDate": "2016-10-10T00:00:00"
+      },
+      "inboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Madrid",
+        "destination": "Athens International",
+        "departureDate": "2016-10-20T00:00:00"
+      }
+    }
+  ]
+}

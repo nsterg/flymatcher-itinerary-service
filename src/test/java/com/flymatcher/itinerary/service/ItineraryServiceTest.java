@@ -21,7 +21,7 @@ import org.mockito.Mock;
 import com.flymatcher.itinerary.FlightMatch;
 import com.flymatcher.itinerary.builders.FlightMatchBuilder;
 import com.flymatcher.itinerary.domain.ItineraryRequest;
-import com.flymatcher.itinerary.skyscannerclient.SkyscannerAdaptorClient;
+import com.flymatcher.itinerary.skyscanneradaptorclient.SkyscannerAdaptorClient;
 import com.flymatcher.itinerary.transformer.ItineraryRequestTransformer;
 import com.flymatcher.skyscanner.adaptor.api.CheapestQuotesRequest;
 import com.flymatcher.skyscanner.adaptor.api.SkyscannerCheapestQuotesResponse;

@@ -24,8 +24,8 @@ public class ItineraryRequest {
 
 
   public static ItineraryRequest valueOf(final String market, final List<String> origins,
-      final String originCity2, final String currency, final String locale,
-      final String outboundPartialDate, final String inboundPartialDate) {
+      final String currency, final String locale, final String outboundPartialDate,
+      final String inboundPartialDate) {
     final ItineraryRequest request = new ItineraryRequest();
     request.market = market;
     request.origins = origins;

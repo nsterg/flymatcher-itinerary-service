@@ -1,4 +1,4 @@
-package com.flymatcher.itinerary.skyscannerclient;
+package com.flymatcher.itinerary.skyscanneradaptorclient;
 
 import static com.flymatcher.skyscanner.adaptor.api.builders.CheapestQuotesRequestBuilder.aCheapestQuotesRequest;
 import static com.flymatcher.skyscanner.adaptor.api.builders.SkyscannerCheapestQuotesResponseBuilder.aSkyscannerCheapestQuotesResponse;
@@ -26,6 +26,8 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flymatcher.itinerary.exception.SkyscannerAdaptorBadRequestException;
 import com.flymatcher.itinerary.exception.SkyscannerAdaptorServerException;
+import com.flymatcher.itinerary.skyscanneradaptorclient.SkyscannerAdaptorClient;
+import com.flymatcher.itinerary.skyscanneradaptorclient.SkyscannerAdaptorClientImpl;
 import com.flymatcher.skyscanner.adaptor.api.CheapestQuotesRequest;
 import com.flymatcher.skyscanner.adaptor.api.SkyscannerCheapestQuotesResponse;
 

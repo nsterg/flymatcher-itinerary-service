@@ -1,4 +1,4 @@
-package com.flymatcher.itinerary.skyscannerclient;
+package com.flymatcher.itinerary.skyscanneradaptorclient;
 
 import static javax.ws.rs.core.UriBuilder.fromPath;
 import static org.springframework.http.HttpMethod.GET;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,6 +19,7 @@ import com.flymatcher.itinerary.exception.SkyscannerAdaptorServerException;
 import com.flymatcher.skyscanner.adaptor.api.CheapestQuotesRequest;
 import com.flymatcher.skyscanner.adaptor.api.SkyscannerCheapestQuotesResponse;
 
+@Component
 public class SkyscannerAdaptorClientImpl implements SkyscannerAdaptorClient {
 
 

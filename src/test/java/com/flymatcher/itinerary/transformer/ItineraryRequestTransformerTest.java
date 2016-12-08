@@ -28,8 +28,6 @@ public class ItineraryRequestTransformerTest {
     final CheapestQuotesRequest request2 = aCheapestQuotesRequest().withDefaultValues()
         .withDestinationCountry(destinationCountry).withOriginCity("MAD").build();
 
-
-
     final List<CheapestQuotesRequest> actual =
         transformer.transform(itineraryRequest, destinationCountry);
 

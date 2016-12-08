@@ -1,0 +1,21 @@
+{
+  "quotes": [
+    {
+      "price": 72.0,
+      "direct": true,
+      "quoteDate":"2016-08-18T11:56:00",
+      "outboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Athens International",
+        "destination": "Paris Charles de Gaulle",
+        "departureDate": "2016-10-10T00:00:00"
+      },
+      "inboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Paris Charles de Gaulle",
+        "destination": "Athens International",
+        "departureDate": "2016-10-20T00:00:00"
+      }
+    }
+  ]
+}

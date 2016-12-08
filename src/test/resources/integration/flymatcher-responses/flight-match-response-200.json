@@ -1,14 +1,14 @@
 [
    {
-      "destination":"PARIS",
+      "destination":"Milan Malpensa",
       "price":100.0,
-      "outboundDate":"2016-01-01",
-      "inboundDate":"2016-01-01"
+      "outboundDate":"2016-10-10",
+      "inboundDate":"2016-10-20"
    },
    {
-      "destination":"MILAN",
+      "destination":"Paris Charles de Gaulle",
       "price":150.0,
-      "outboundDate":"2016-01-01",
-      "inboundDate":"2016-01-01"
+      "outboundDate":"2016-10-10",
+      "inboundDate":"2016-10-20"
    }
 ]

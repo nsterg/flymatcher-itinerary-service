@@ -10,22 +10,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import com.flymatcher.itinerary.FlightMatch;
 import com.flymatcher.itinerary.domain.ItineraryRequest;
-import com.flymatcher.itinerary.skyscannerclient.SkyscannerAdaptorClient;
+import com.flymatcher.itinerary.skyscanneradaptorclient.SkyscannerAdaptorClient;
 import com.flymatcher.itinerary.transformer.ItineraryRequestTransformer;
 import com.flymatcher.skyscanner.adaptor.api.CheapestQuotesRequest;
 import com.flymatcher.skyscanner.adaptor.api.SkyscannerCheapestQuotesResponse;
 import com.flymatcher.skyscanner.adaptor.api.SkyscannerQuote;
 
+@Component
 public class ItineraryServiceImpl implements ItineraryService {
 
   private final SkyscannerAdaptorClient skyscannerAdaptorClient;
   private final ItineraryRequestTransformer transformer;
   private final List<String> countries;
 
+  @Autowired
   public ItineraryServiceImpl(final SkyscannerAdaptorClient skyscannerAdaptorClient,
-      final ItineraryRequestTransformer transformer, final List<String> countries) {
+      final ItineraryRequestTransformer transformer,
+      @Value("#{'${skyscanner.european.airports}'.split(',')}") final List<String> countries) {
     this.skyscannerAdaptorClient = skyscannerAdaptorClient;
     this.transformer = transformer;
     this.countries = countries;
