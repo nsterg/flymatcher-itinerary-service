@@ -1,7 +1,7 @@
 package com.flymatcher.itinerary.transformer;
 
+import static com.flymatcher.itinerary.domain.builders.CheapestQuotesRequestBuilder.aCheapestQuotesRequest;
 import static com.flymatcher.itinerary.domain.builders.ItineraryRequestBuilder.anItineraryRequest;
-import static com.flymatcher.skyscanner.adaptor.api.builders.CheapestQuotesRequestBuilder.aCheapestQuotesRequest;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
@@ -9,8 +9,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.flymatcher.itinerary.domain.CheapestQuotesRequest;
 import com.flymatcher.itinerary.domain.ItineraryRequest;
-import com.flymatcher.skyscanner.adaptor.api.CheapestQuotesRequest;
 
 public class ItineraryRequestTransformerTest {
 

@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.flymatcher.itinerary.domain.CheapestQuotesRequest;
 import com.flymatcher.itinerary.domain.ItineraryRequest;
-import com.flymatcher.skyscanner.adaptor.api.CheapestQuotesRequest;
 
 @Component
 public class ItineraryRequestTransformerImpl implements ItineraryRequestTransformer {

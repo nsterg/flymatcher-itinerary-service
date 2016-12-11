@@ -5,13 +5,14 @@ import static com.github.restdriver.clientdriver.RestClientDriver.giveResponse;
 import static com.github.restdriver.clientdriver.RestClientDriver.onRequestTo;
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.http.ContentType.JSON;
-import static java.util.Arrays.asList;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.http.HttpStatus.SC_OK;
 import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONAs;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -59,35 +60,57 @@ public class ItinerariesResourceIntegrationTest {
     final String skyscannerAdaptorResponse4 = readFileToString(new File(
         "src/test/resources/integration/adaptor-responses/skyscanner-adaptor-response-4.json"));
 
-    driver.addExpectation(onRequestTo("/v1/cheapest-quotes/").withMethod(GET),
+    driver.addExpectation(
+        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/ATH/IT/2016-10-10/2016-10-20").withMethod(
+            GET),
         giveResponse(skyscannerAdaptorResponse1, "application/json").withStatus(200));
 
-    driver.addExpectation(onRequestTo("/v1/cheapest-quotes/").withMethod(GET),
-
+    driver.addExpectation(
+        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/MAD/IT/2016-10-10/2016-10-20").withMethod(
+            GET),
         giveResponse(skyscannerAdaptorResponse2, "application/json").withStatus(200));
 
-    driver.addExpectation(onRequestTo("/v1/cheapest-quotes/").withMethod(GET),
+    driver.addExpectation(
+        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/ATH/FR/2016-10-10/2016-10-20").withMethod(
+            GET),
         giveResponse(skyscannerAdaptorResponse3, "application/json").withStatus(200));
 
-    driver.addExpectation(onRequestTo("/v1/cheapest-quotes/").withMethod(GET),
-
+    driver.addExpectation(
+        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/MAD/FR/2016-10-10/2016-10-20").withMethod(
+            GET),
         giveResponse(skyscannerAdaptorResponse4, "application/json").withStatus(200));
 
     // @formatter:off
     given()
         .accept(JSON)
-        .contentType(JSON)
-        .queryParam("origins", asList("Athens International", "Madrid")).queryParam("inboundDate", "2016-10-10")
-        .queryParam("outboundDate", "2016-10-20").when().get(buildRequestUrlStr()).then()
+          .contentType(JSON)
+          .pathParameters(aParameterNameValuePairs())
+        .when()
+          .get(buildRequestUrlStr())
+        .then()
         .assertThat()
-        .body(sameJSONAs(readFileToString(new File(
+          .body(sameJSONAs(readFileToString(new File(
             "src/test/resources/integration/flymatcher-responses/flight-match-response-200.json"))))
         .statusCode(SC_OK);
     // @formatter:on
   }
 
+
+  private Map<String, Object> aParameterNameValuePairs() {
+    final Map<String, Object> map = new HashMap<>();
+    map.put("market", "GR");
+    map.put("currency", "EUR");
+    map.put("locale", "en-GB");
+    map.put("origins", "ATH,MAD");
+    map.put("outboundDate", "2016-10-10");
+    map.put("inboundDate", "2016-10-20");
+
+    return map;
+  }
+
   private String buildRequestUrlStr() {
-    return "http://localhost:" + port + contextPath + "/v1/itineraries";
+    return "http://localhost:" + port + contextPath
+        + "/v1/itineraries/{market}/{currency}/{locale}/{origins}/{outboundDate}/{inboundDate}";
   }
 }
 

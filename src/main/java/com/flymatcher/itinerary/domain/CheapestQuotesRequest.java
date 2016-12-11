@@ -6,29 +6,30 @@ import static org.apache.commons.lang.builder.HashCodeBuilder.reflectionHashCode
 import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString;
 
 import java.time.LocalDate;
-import java.util.List;
 
-public class ItineraryRequest {
+public class CheapestQuotesRequest {
 
   private String market;
 
-  private List<String> origins;
+  private String originCity;
 
   private String currency;
 
   private String locale;
 
+  private String destinationCountry;
+
   private LocalDate outboundPartialDate;
 
   private LocalDate inboundPartialDate;
 
-
-  public static ItineraryRequest valueOf(final String market, final String currency,
-      final String locale, final List<String> origins, final String outboundPartialDate,
-      final String inboundPartialDate) {
-    final ItineraryRequest request = new ItineraryRequest();
+  public static CheapestQuotesRequest valueOf(final String market, final String currency,
+      final String locale, final String originCity, final String destinationCountry,
+      final String outboundPartialDate, final String inboundPartialDate) {
+    final CheapestQuotesRequest request = new CheapestQuotesRequest();
     request.market = market;
-    request.origins = origins;
+    request.originCity = originCity;
+    request.destinationCountry = destinationCountry;
     request.currency = currency;
     request.locale = locale;
     request.outboundPartialDate = parse(outboundPartialDate);
@@ -44,12 +45,12 @@ public class ItineraryRequest {
     this.market = market;
   }
 
-  public List<String> getOrigins() {
-    return origins;
+  public String getOriginCity() {
+    return originCity;
   }
 
-  public void setOrigins(final List<String> origins) {
-    this.origins = origins;
+  public void setOriginCity(final String city) {
+    this.originCity = city;
   }
 
   public String getCurrency() {
@@ -67,6 +68,14 @@ public class ItineraryRequest {
 
   public void setLocale(final String locale) {
     this.locale = locale;
+  }
+
+  public String getDestinationCountry() {
+    return destinationCountry;
+  }
+
+  public void setDestinationCountry(final String destinationCountry) {
+    this.destinationCountry = destinationCountry;
   }
 
   public LocalDate getOutboundPartialDate() {

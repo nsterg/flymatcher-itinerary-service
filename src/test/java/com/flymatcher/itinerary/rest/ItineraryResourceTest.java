@@ -43,8 +43,8 @@ public class ItineraryResourceTest {
 
     given(mockItineraryService.findFlightMatches(itineraryRequest)).willReturn(serviceResponse);
 
-    final ResponseEntity<? extends Object> actual =
-        resource.findFlightMatch(asList("ATH", "MAD"), "2016-10-10", "2016-10-20");
+    final ResponseEntity<? extends Object> actual = resource.findFlightMatch("GR", "EUR", "en-GB",
+        asList("ATH", "MAD"), "2016-10-10", "2016-10-20");
 
     assertEquals("Incorrect status", OK, actual.getStatusCode());
     assertEquals("Incorrect body", serviceResponse, actual.getBody());

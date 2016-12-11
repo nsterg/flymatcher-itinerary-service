@@ -15,10 +15,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.flymatcher.itinerary.FlightMatch;
+import com.flymatcher.itinerary.domain.CheapestQuotesRequest;
 import com.flymatcher.itinerary.domain.ItineraryRequest;
 import com.flymatcher.itinerary.skyscanneradaptorclient.SkyscannerAdaptorClient;
 import com.flymatcher.itinerary.transformer.ItineraryRequestTransformer;
-import com.flymatcher.skyscanner.adaptor.api.CheapestQuotesRequest;
 import com.flymatcher.skyscanner.adaptor.api.SkyscannerCheapestQuotesResponse;
 import com.flymatcher.skyscanner.adaptor.api.SkyscannerQuote;
 

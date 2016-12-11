@@ -1,6 +1,6 @@
 package com.flymatcher.itinerary.skyscanneradaptorclient;
 
-import static com.flymatcher.skyscanner.adaptor.api.builders.CheapestQuotesRequestBuilder.aCheapestQuotesRequest;
+import static com.flymatcher.itinerary.domain.builders.CheapestQuotesRequestBuilder.aCheapestQuotesRequest;
 import static com.flymatcher.skyscanner.adaptor.api.builders.SkyscannerCheapestQuotesResponseBuilder.aSkyscannerCheapestQuotesResponse;
 import static java.nio.charset.Charset.forName;
 import static org.junit.Assert.assertEquals;
@@ -17,25 +17,23 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.flymatcher.itinerary.domain.CheapestQuotesRequest;
 import com.flymatcher.itinerary.exception.SkyscannerAdaptorBadRequestException;
 import com.flymatcher.itinerary.exception.SkyscannerAdaptorServerException;
-import com.flymatcher.itinerary.skyscanneradaptorclient.SkyscannerAdaptorClient;
-import com.flymatcher.itinerary.skyscanneradaptorclient.SkyscannerAdaptorClientImpl;
-import com.flymatcher.skyscanner.adaptor.api.CheapestQuotesRequest;
 import com.flymatcher.skyscanner.adaptor.api.SkyscannerCheapestQuotesResponse;
 
 
 public class SkyscannerAdaptorClientTest {
 
   private static final String SKYSCANNER_ADAPTOR_BASE_URL = "base-url";
-  private static final String ADAPTOR_CHEAPEST_QUOTES_URL = "/v1/cheapest-quotes/";
+  private static final String ADAPTOR_CHEAPEST_QUOTES_URL =
+      "/v1/cheapest-quotes/GR/EUR/en-GB/ATH/ESP/2016-10-10/2016-10-20";
 
   private static final String CHEAPEST_QUOTES_URL =
       SKYSCANNER_ADAPTOR_BASE_URL + ADAPTOR_CHEAPEST_QUOTES_URL;
@@ -70,8 +68,7 @@ public class SkyscannerAdaptorClientTest {
 
     final SkyscannerCheapestQuotesResponse expected = aSkyscannerCheapestQuotesResponse().build();
 
-    given(mockRestTemplate.exchange(CHEAPEST_QUOTES_URL, GET,
-        new HttpEntity<CheapestQuotesRequest>(cheapestQuotesRequest),
+    given(mockRestTemplate.exchange(CHEAPEST_QUOTES_URL, GET, null,
         SkyscannerCheapestQuotesResponse.class)).willReturn(mockResponseEntity);
 
     given(mockResponseEntity.getBody()).willReturn(expected);
@@ -93,8 +90,7 @@ public class SkyscannerAdaptorClientTest {
     final String errorJson =
         "{\"errorDescription\": \"Skyscanner quote response included validation errors.\", \"errorType\": \"BAD_REQUEST\", \"providerErrors\": null}";
 
-    given(mockRestTemplate.exchange(CHEAPEST_QUOTES_URL, GET,
-        new HttpEntity<CheapestQuotesRequest>(cheapestQuotesRequest),
+    given(mockRestTemplate.exchange(CHEAPEST_QUOTES_URL, GET, null,
         SkyscannerCheapestQuotesResponse.class))
             .willThrow(buildHttpStatusCodeException(BAD_REQUEST, errorJson));
 
@@ -114,8 +110,7 @@ public class SkyscannerAdaptorClientTest {
 
     final String errorJson = "{\"error\":\"Some unexpected json response\"}";
 
-    given(mockRestTemplate.exchange(CHEAPEST_QUOTES_URL, GET,
-        new HttpEntity<CheapestQuotesRequest>(cheapestQuotesRequest),
+    given(mockRestTemplate.exchange(CHEAPEST_QUOTES_URL, GET, null,
         SkyscannerCheapestQuotesResponse.class))
             .willThrow(buildHttpStatusCodeException(BAD_REQUEST, errorJson));
 
@@ -136,8 +131,7 @@ public class SkyscannerAdaptorClientTest {
 
     final String errorJson = "Something went terribly wrong";
 
-    given(mockRestTemplate.exchange(CHEAPEST_QUOTES_URL, GET,
-        new HttpEntity<CheapestQuotesRequest>(cheapestQuotesRequest),
+    given(mockRestTemplate.exchange(CHEAPEST_QUOTES_URL, GET, null,
         SkyscannerCheapestQuotesResponse.class))
             .willThrow(buildHttpStatusCodeException(INTERNAL_SERVER_ERROR, errorJson));
 

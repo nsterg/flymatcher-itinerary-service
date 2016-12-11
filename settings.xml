@@ -1,0 +1,14 @@
+<settings>
+    <servers>
+        <server>
+            <id>myMavenRepo.read</id>
+            <username>myMavenRepo</username>
+            <password>qwerty90</password>
+        </server>
+        <server>
+            <id>myMavenRepo.write</id>
+            <username>myMavenRepo</username>
+            <password>qwerty90</password>
+        </server>
+    </servers>
+</settings>

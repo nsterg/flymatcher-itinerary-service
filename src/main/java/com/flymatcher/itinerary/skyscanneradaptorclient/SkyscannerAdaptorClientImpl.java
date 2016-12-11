@@ -6,7 +6,6 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -14,9 +13,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flymatcher.error.FlymatcherError;
+import com.flymatcher.itinerary.domain.CheapestQuotesRequest;
 import com.flymatcher.itinerary.exception.SkyscannerAdaptorBadRequestException;
 import com.flymatcher.itinerary.exception.SkyscannerAdaptorServerException;
-import com.flymatcher.skyscanner.adaptor.api.CheapestQuotesRequest;
 import com.flymatcher.skyscanner.adaptor.api.SkyscannerCheapestQuotesResponse;
 
 @Component
@@ -31,11 +30,15 @@ public class SkyscannerAdaptorClientImpl implements SkyscannerAdaptorClient {
   private static final String VALIDATION_MESSAGE =
       "Skyscanner adaptor response included validation errors.";
 
+  private static final String SKYSCANNER_ADAPTOR_PATH_URL =
+      "{market}/{currency}/{locale}/{city}/{destinationCountry}/{outboundPartialDate}/{inboundPartialDate}";
+
   @Autowired
   public SkyscannerAdaptorClientImpl(final RestTemplate restTemplate,
       @Value("${skyscanner-adaptor.cheapest-quotes-base-url}") final String adaptorCheapestQuotesBaseUrl,
       final ObjectMapper objectMapper) {
-    this.adaptorCheapestQuotesUrl = adaptorCheapestQuotesBaseUrl + "/v1/cheapest-quotes/";
+    this.adaptorCheapestQuotesUrl =
+        adaptorCheapestQuotesBaseUrl + "/v1/cheapest-quotes/" + SKYSCANNER_ADAPTOR_PATH_URL;
 
     this.adaptorRestTemplate = restTemplate;
     this.objectMapper = objectMapper;
@@ -46,8 +49,8 @@ public class SkyscannerAdaptorClientImpl implements SkyscannerAdaptorClient {
 
     ResponseEntity<SkyscannerCheapestQuotesResponse> responseEntity = null;
     try {
-      responseEntity = adaptorRestTemplate.exchange(buildUrl(request), GET,
-          new HttpEntity<CheapestQuotesRequest>(request), SkyscannerCheapestQuotesResponse.class);
+      responseEntity = adaptorRestTemplate.exchange(buildUrl(request), GET, null,
+          SkyscannerCheapestQuotesResponse.class);
       return responseEntity.getBody();
 
     } catch (final HttpStatusCodeException e) {
@@ -69,8 +72,16 @@ public class SkyscannerAdaptorClientImpl implements SkyscannerAdaptorClient {
   }
 
   private String buildUrl(final CheapestQuotesRequest request) {
-    return fromPath(adaptorCheapestQuotesUrl).build(request).toString();
-
+    // @formatter:off
+    return fromPath(adaptorCheapestQuotesUrl).build(request.getMarket(), 
+                                             request.getCurrency(),
+                                             request.getLocale(),
+                                             request.getOriginCity(),
+                                             request.getDestinationCountry(),
+                                             request.getOutboundPartialDate().toString(),
+                                             request.getInboundPartialDate().toString())
+        .toString();
+    // @formatter:on
   }
 
 }

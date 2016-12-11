@@ -14,7 +14,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<skyscanner-adaptor-api.version>1.0.5-SNAPSHOT</skyscanner-adaptor-api.version>
+		<skyscanner-adaptor-api.version>1.0.6</skyscanner-adaptor-api.version>
 		<flymatcher-error-api.version>1.0.1</flymatcher-error-api.version>
 		<flymatcher-itinerary-api.version>1.0.2</flymatcher-itinerary-api.version>
 
@@ -132,8 +132,8 @@
 
 	<repositories>
 		<repository>
-			<id>libs-release-local</id>
-			<url>file:///c:/dev/flymatcher/repo/release</url>
+            <id>myMavenRepo.read</id>
+            <url>https://mymavenrepo.com/repo/ZIVpZfjpXSF3ujM26UZS</url>
 		</repository>
 	</repositories>
 

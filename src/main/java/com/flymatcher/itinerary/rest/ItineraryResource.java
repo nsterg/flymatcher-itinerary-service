@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flymatcher.itinerary.FlightMatch;
@@ -28,19 +28,21 @@ public class ItineraryResource {
     this.itineraryService = itineraryService;
   }
 
-  @RequestMapping(value = "/v1/itineraries", method = GET)
+  @RequestMapping(
+      value = "/v1/itineraries/{market}/{currency}/{locale}/{origins}/{outboundDate}/{inboundDate}",
+      method = GET)
   // @formatter:off
   @ApiResponses(
       value = {@ApiResponse(code = 200, message = "Success", response = FlightMatch.class)})
   // @formatter:on
-  public ResponseEntity<? extends Object> findFlightMatch(
-      @RequestParam("origins") final List<String> origins,
-      @RequestParam("outboundDate") final String outboundDate,
-      @RequestParam("inboundDate") final String inboundDate) {
+  public ResponseEntity<? extends Object> findFlightMatch(@PathVariable final String market,
+      @PathVariable final String currency, @PathVariable final String locale,
+      @PathVariable final List<String> origins, @PathVariable final String outboundDate,
+      @PathVariable final String inboundDate) {
 
     // TODO get market, locale from UI
     final List<FlightMatch> flightMatches = itineraryService
-        .findFlightMatches(valueOf("GR", origins, "EUR", "en-GB", outboundDate, inboundDate));
+        .findFlightMatches(valueOf(market, currency, locale, origins, outboundDate, inboundDate));
 
     return new ResponseEntity<List<FlightMatch>>(flightMatches, OK);
 
