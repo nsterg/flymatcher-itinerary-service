@@ -16,7 +16,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<skyscanner-adaptor-api.version>1.0.6</skyscanner-adaptor-api.version>
 		<flymatcher-error-api.version>1.0.1</flymatcher-error-api.version>
-		<flymatcher-itinerary-api.version>1.0.2</flymatcher-itinerary-api.version>
+		<flymatcher-itinerary-api.version>1.0.3</flymatcher-itinerary-api.version>
 
 	</properties>
 
