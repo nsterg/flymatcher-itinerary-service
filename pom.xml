@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>flymatcher-microservice-parent</artifactId>
 		<groupId>com.flymatcher</groupId>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 	</parent>
 
 	<artifactId>flymatcher-itinerary-service</artifactId>
