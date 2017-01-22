@@ -1,0 +1,11 @@
+{
+  "errorDescription": "Skyscanner quote response included validation errors.",
+  "providerErrors": [
+    {
+      "parameterName": "Origin and Destination must be valid codes",
+      "parameterValue": "Your inputs could not be parsed, please refer to documentation",
+      "message": "Invalid Origin and Destination combination"
+    }
+  ],
+  "errorType": "BAD_REQUEST"
+}

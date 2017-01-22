@@ -40,7 +40,7 @@ public class ItineraryResource {
       @PathVariable final List<String> origins, @PathVariable final String outboundDate,
       @PathVariable final String inboundDate) {
 
-    // TODO get market, locale from UI
+
     final List<FlightMatch> flightMatches = itineraryService
         .findFlightMatches(valueOf(market, currency, locale, origins, outboundDate, inboundDate));
 

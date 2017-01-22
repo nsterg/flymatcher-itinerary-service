@@ -1,0 +1,5 @@
+{  
+   "errorDescription":"Request date was not in the expected format: yyyy-mm-dd",
+   "providerErrors":null,
+   "errorType":"BAD_REQUEST"
+}

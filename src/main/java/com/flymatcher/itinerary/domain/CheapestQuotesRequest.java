@@ -7,6 +7,8 @@ import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString
 
 import java.time.LocalDate;
 
+import com.flymatcher.itinerary.exception.BadRequestException;
+
 public class CheapestQuotesRequest {
 
   private String market;
@@ -32,8 +34,12 @@ public class CheapestQuotesRequest {
     request.destinationCountry = destinationCountry;
     request.currency = currency;
     request.locale = locale;
-    request.outboundPartialDate = parse(outboundPartialDate);
-    request.inboundPartialDate = parse(inboundPartialDate);
+    try {
+      request.outboundPartialDate = parse(outboundPartialDate);
+      request.inboundPartialDate = parse(inboundPartialDate);
+    } catch (final Exception e) {
+      throw new BadRequestException("Request date was not in the expected format: yyyy-mm-dd");
+    }
     return request;
   }
 

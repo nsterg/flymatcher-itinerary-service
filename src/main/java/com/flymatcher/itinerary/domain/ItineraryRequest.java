@@ -8,6 +8,8 @@ import static org.apache.commons.lang.builder.ToStringBuilder.reflectionToString
 import java.time.LocalDate;
 import java.util.List;
 
+import com.flymatcher.itinerary.exception.BadRequestException;
+
 public class ItineraryRequest {
 
   private String market;
@@ -31,8 +33,12 @@ public class ItineraryRequest {
     request.origins = origins;
     request.currency = currency;
     request.locale = locale;
-    request.outboundPartialDate = parse(outboundPartialDate);
-    request.inboundPartialDate = parse(inboundPartialDate);
+    try {
+      request.outboundPartialDate = parse(outboundPartialDate);
+      request.inboundPartialDate = parse(inboundPartialDate);
+    } catch (final Exception e) {
+      throw new BadRequestException("Request date was not in the expected format: yyyy-mm-dd");
+    }
     return request;
   }
 

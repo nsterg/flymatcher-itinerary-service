@@ -29,6 +29,12 @@ public class FlymatcherItineraryExceptionHandler {
     return new ResponseEntity<>(exception.getError(), BAD_REQUEST);
   }
 
+  @ExceptionHandler(value = {BadRequestException.class})
+  public ResponseEntity<FlymatcherError> handleException(final BadRequestException exception) {
+
+    return buildErrorResponse(BAD_REQUEST, ErrorType.BAD_REQUEST, exception.getMessage());
+  }
+
   private ResponseEntity<FlymatcherError> buildErrorResponse(final HttpStatus status,
       final ErrorType errorType, final String message) {
 

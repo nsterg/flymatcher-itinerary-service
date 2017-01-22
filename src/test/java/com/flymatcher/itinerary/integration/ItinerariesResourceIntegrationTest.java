@@ -6,6 +6,8 @@ import static com.github.restdriver.clientdriver.RestClientDriver.onRequestTo;
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.http.ContentType.JSON;
 import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.http.HttpStatus.SC_INTERNAL_SERVER_ERROR;
 import static org.apache.http.HttpStatus.SC_OK;
 import static uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONAs;
 
@@ -95,6 +97,74 @@ public class ItinerariesResourceIntegrationTest {
     // @formatter:on
   }
 
+  @Test
+  public void shouldReturnBadRequestError() throws IOException {
+
+    // @formatter:off
+    given()
+        .accept(JSON)
+          .contentType(JSON)
+          .pathParameters(aParameterNameValuePairsWithWrongDate())
+        .when()
+          .get(buildRequestUrlStr())
+        .then()
+        .assertThat()
+          .body(sameJSONAs(readFileToString(new File(
+            "src/test/resources/integration/flymatcher-responses/flight-match-response-400.json"))))
+        .statusCode(SC_BAD_REQUEST);
+    // @formatter:on
+  }
+
+  @Test
+  public void shouldReturnBadRequestErrorWhenSkyscannerAdaptorReturns() throws IOException {
+
+    final String skyscannerAdaptorResponse = readFileToString(new File(
+        "src/test/resources/integration/adaptor-responses/skyscanner-adaptor-400-response.json"));
+
+    driver.addExpectation(
+        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/ATH/IT/2016-10-10/2016-10-20").withMethod(
+            GET),
+        giveResponse(skyscannerAdaptorResponse, "application/json").withStatus(400));
+
+    // @formatter:off
+    given()
+        .accept(JSON)
+          .contentType(JSON)
+          .pathParameters(aParameterNameValuePairs())
+        .when()
+          .get(buildRequestUrlStr())
+        .then()
+        .assertThat()
+          .body(sameJSONAs(readFileToString(new File(
+            "src/test/resources/integration/flymatcher-responses/flight-match-response-400-skyscanner-error.json"))))
+        .statusCode(SC_BAD_REQUEST);
+    // @formatter:on
+  }
+
+  @Test
+  public void shouldReturnInternalServerErrorWhenSkyscannerAdaptorReturnsNonJson()
+      throws IOException {
+
+    driver.addExpectation(
+        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/ATH/IT/2016-10-10/2016-10-20")
+            .withMethod(GET),
+        giveResponse("<html>Some nexpected error</html>", "application/json").withStatus(500));
+
+    // @formatter:off
+    given()
+        .accept(JSON)
+          .contentType(JSON)
+          .pathParameters(aParameterNameValuePairs())
+        .when()
+          .get(buildRequestUrlStr())
+        .then()
+        .assertThat()
+          .body(sameJSONAs(readFileToString(new File(
+            "src/test/resources/integration/flymatcher-responses/flight-match-response-500-skyscanner-error.json"))))
+        .statusCode(SC_INTERNAL_SERVER_ERROR);
+    // @formatter:on
+  }
+
 
   private Map<String, Object> aParameterNameValuePairs() {
     final Map<String, Object> map = new HashMap<>();
@@ -104,6 +174,13 @@ public class ItinerariesResourceIntegrationTest {
     map.put("origins", "ATH,MAD");
     map.put("outboundDate", "2016-10-10");
     map.put("inboundDate", "2016-10-20");
+
+    return map;
+  }
+
+  private Map<String, Object> aParameterNameValuePairsWithWrongDate() {
+    final Map<String, Object> map = aParameterNameValuePairs();
+    map.put("inboundDate", "XXX");
 
     return map;
   }
