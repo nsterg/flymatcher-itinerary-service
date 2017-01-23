@@ -8,12 +8,16 @@
         "carrier": "easyJet",
         "origin": "Madrid",
         "destination": "Milan Malpensa",
+        "country": "Italy",
+        "airportCode":"MIL",        
         "departureDate": "2016-10-10T00:00:00"
       },
       "inboundLeg": {
         "carrier": "easyJet",
         "origin": "Milan Malpensa",
         "destination": "Madrid",
+        "country": "Spain",
+        "airportCode":"MAD",        
         "departureDate": "2016-10-20T00:00:00"
       }
     }

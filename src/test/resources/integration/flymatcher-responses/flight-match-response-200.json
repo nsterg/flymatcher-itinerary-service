@@ -1,12 +1,16 @@
 [
    {
       "destination":"Milan Malpensa",
+      "airportCode":"MIL",
+      "country":"Italy",        
       "price":100.0,
       "outboundDate":"2016-10-10",
       "inboundDate":"2016-10-20"
    },
    {
       "destination":"Paris Charles de Gaulle",
+      "airportCode":"CDG",
+      "country":"France",        
       "price":150.0,
       "outboundDate":"2016-10-10",
       "inboundDate":"2016-10-20"

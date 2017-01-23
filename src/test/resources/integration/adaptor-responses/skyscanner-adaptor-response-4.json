@@ -8,12 +8,16 @@
         "carrier": "easyJet",
         "origin": "Madrid",
         "destination": "Paris Charles de Gaulle",
+        "airportCode":"CDG",
+        "country":"France",         
         "departureDate": "2016-10-10T00:00:00"
       },
       "inboundLeg": {
         "carrier": "easyJet",
         "origin": "Paris Charles de Gaulle",
         "destination": "Madrid",
+        "airportCode":"MAD",
+        "country":"Spain",         
         "departureDate": "2016-10-20T00:00:00"
       }
     }

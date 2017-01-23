@@ -75,6 +75,8 @@ public class ItineraryServiceImpl implements ItineraryService {
         fm.setInboundDate(q.getInboundLeg().getDepartureDate().toLocalDate());
         fm.setOutboundDate(q.getOutboundLeg().getDepartureDate().toLocalDate());
         fm.setPrice(q.getPrice());
+        fm.setAirportCode(q.getOutboundLeg().getAirportCode());
+        fm.setCountry(q.getOutboundLeg().getCountry());
         flightMatchMap.put(destination, fm);
       } else {
         flightMatch.setPrice(flightMatch.getPrice() + q.getPrice());
