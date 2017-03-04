@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.flymatcher.itinerary.FlightMatch;
+import com.flymatcher.itinerary.Route;
 import com.flymatcher.itinerary.domain.CheapestQuotesRequest;
 import com.flymatcher.itinerary.domain.ItineraryRequest;
 import com.flymatcher.itinerary.skyscanneradaptorclient.SkyscannerAdaptorClient;
@@ -67,27 +68,51 @@ public class ItineraryServiceImpl implements ItineraryService {
 
     final Map<String, FlightMatch> flightMatchMap = new HashMap<>();
     skyscannerQuote.forEach(q -> {
+
       final String destination = q.getOutboundLeg().getDestination();
+
       final FlightMatch flightMatch = flightMatchMap.get(destination);
+
       if (flightMatch == null) {
-        final FlightMatch fm = new FlightMatch();
-        fm.setDestination(destination);
-        fm.setInboundDate(q.getInboundLeg().getDepartureDate().toLocalDate());
-        fm.setOutboundDate(q.getOutboundLeg().getDepartureDate().toLocalDate());
-        fm.setPrice(q.getPrice());
-        fm.setAirportCode(q.getOutboundLeg().getAirportCode());
-        fm.setCountry(q.getOutboundLeg().getCountry());
-        flightMatchMap.put(destination, fm);
+        flightMatchMap.put(destination, createFlightMatch(q, destination));
       } else {
         flightMatch.setPrice(flightMatch.getPrice() + q.getPrice());
+        flightMatch.getRoutes().add(createRoute(q));
         matchingDestinations.add(destination);
       }
+
     });
 
     return flightMatchMap.values().stream()
         .filter(n -> !matchingDestinations.add(n.getDestination()))
         .sorted((f1, f2) -> compare(f1.getPrice(), f2.getPrice())).collect(toList());
 
+  }
+
+  private FlightMatch createFlightMatch(final SkyscannerQuote q, final String destination) {
+    final FlightMatch fm = new FlightMatch();
+
+    fm.setDestination(destination);
+    fm.setInboundDate(q.getInboundLeg().getDepartureDate().toLocalDate());
+    fm.setOutboundDate(q.getOutboundLeg().getDepartureDate().toLocalDate());
+    fm.setPrice(q.getPrice());
+    final List<Route> routes = new ArrayList<>();
+    routes.add(createRoute(q));
+    fm.setRoutes(routes);
+    // fm.setAirportCode(q.getOutboundLeg().getAirportCode());
+    fm.setCountry(q.getOutboundLeg().getCountry());
+
+    return fm;
+  }
+
+  private Route createRoute(final SkyscannerQuote q) {
+    final Route route = new Route();
+    route.setDestinationAirport(q.getOutboundLeg().getDestination());
+    route.setDestinationAirportCode(q.getOutboundLeg().getDestinationCode());
+    route.setOriginAirport(q.getOutboundLeg().getOrigin());
+    route.setOriginAirportCode(q.getOutboundLeg().getOriginCode());
+    route.setPrice(q.getPrice());
+    return route;
   }
 
 }

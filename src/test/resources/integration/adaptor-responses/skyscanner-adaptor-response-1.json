@@ -8,7 +8,8 @@
         "carrier": "easyJet",
         "origin": "Athens International",
         "destination": "Milan Malpensa",
-        "airportCode":"MIL",
+        "originCode": "ATH",
+        "destinationCode": "MIL",
         "country":"Italy",          
         "departureDate": "2016-10-10T00:00:00"
       },
@@ -16,7 +17,8 @@
         "carrier": "easyJet",
         "origin": "Madrid",
         "destination": "Athens International",
-        "airportCode":"MAD",
+        "originCode": "MAD",
+        "destinationCode": "ATH",
         "country":"Spain",          
         "departureDate": "2016-10-20T00:00:00"
       }

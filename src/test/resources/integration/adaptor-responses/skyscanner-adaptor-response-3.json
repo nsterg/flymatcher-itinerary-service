@@ -8,7 +8,8 @@
         "carrier": "easyJet",
         "origin": "Athens International",
         "destination": "Paris Charles de Gaulle",
-        "airportCode":"CDG",
+        "originCode": "ATH",
+        "destinationCode": "CDG",
         "country":"France",         
         "departureDate": "2016-10-10T00:00:00"
       },
@@ -16,7 +17,8 @@
         "carrier": "easyJet",
         "origin": "Paris Charles de Gaulle",
         "destination": "Athens International",
-        "airportCode":"ATH",
+        "originCode": "CDG",
+        "destinationCode": "ATH",
         "country":"Greece",         
         "departureDate": "2016-10-20T00:00:00"
       }

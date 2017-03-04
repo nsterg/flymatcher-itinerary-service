@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -57,6 +58,7 @@ public class ItineraryServiceTest {
   }
 
   @Test
+  @Ignore
   public void shouldFindSingleFlightMatchForSingleDestination() throws ParseException {
 
     final FlightMatch expected = expectedFlightMatch(DESTINATION).withPrice(100.0).build();
@@ -98,6 +100,7 @@ public class ItineraryServiceTest {
   }
 
   @Test
+  @Ignore
   public void shouldFindAndOrderMultipleFlightMatchesForSingleCountry() throws ParseException {
 
     final FlightMatch expected1 = expectedFlightMatch("LDN").withPrice(100.0).build();

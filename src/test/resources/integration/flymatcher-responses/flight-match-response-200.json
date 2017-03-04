@@ -1,16 +1,46 @@
-[
-   {
+[  
+   {  
       "destination":"Milan Malpensa",
-      "airportCode":"MIL",
-      "country":"Italy",        
+      "routes":[  
+         {  
+            "originAirport":"Athens International",
+            "destinationAirport":"Milan Malpensa",
+            "originAirportCode":"ATH",
+            "destinationAirportCode":"MIL",
+            "price":62.0
+         },
+         {  
+			"originAirport":"Madrid",
+            "destinationAirport":"Milan Malpensa",
+            "originAirportCode":"MAD",
+            "destinationAirportCode":"MIL",
+            "price":38.0
+         }
+      ],
+      "country":"Italy",
       "price":100.0,
       "outboundDate":"2016-10-10",
       "inboundDate":"2016-10-20"
    },
-   {
+   {  
       "destination":"Paris Charles de Gaulle",
-      "airportCode":"CDG",
-      "country":"France",        
+      "routes":[  
+         {  
+            "originAirport":"Madrid",
+            "destinationAirport":"Paris Charles de Gaulle",
+            "originAirportCode":"MAD",
+            "destinationAirportCode":"CDG",            
+            "price":78.0
+         },
+         {  
+            "originAirport":"Athens International",
+            "destinationAirport":"Paris Charles de Gaulle",         
+            "originAirportCode":"ATH",
+            "destinationAirportCode":"CDG",
+            "price":72.0
+         }
+      ],
+      "country":"France",
       "price":150.0,
       "outboundDate":"2016-10-10",
       "inboundDate":"2016-10-20"

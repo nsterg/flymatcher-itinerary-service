@@ -92,7 +92,7 @@ public class ItinerariesResourceIntegrationTest {
         .then()
         .assertThat()
           .body(sameJSONAs(readFileToString(new File(
-            "src/test/resources/integration/flymatcher-responses/flight-match-response-200.json"))))
+            "src/test/resources/integration/flymatcher-responses/flight-match-response-200.json"))).allowingAnyArrayOrdering())
         .statusCode(SC_OK);
     // @formatter:on
   }

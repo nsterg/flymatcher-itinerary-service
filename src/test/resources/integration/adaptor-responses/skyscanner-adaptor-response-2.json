@@ -9,7 +9,8 @@
         "origin": "Madrid",
         "destination": "Milan Malpensa",
         "country": "Italy",
-        "airportCode":"MIL",        
+        "originCode": "MAD",
+        "destinationCode": "MIL",        
         "departureDate": "2016-10-10T00:00:00"
       },
       "inboundLeg": {
@@ -17,7 +18,8 @@
         "origin": "Milan Malpensa",
         "destination": "Madrid",
         "country": "Spain",
-        "airportCode":"MAD",        
+        "originCode": "MIL",
+        "destinationCode": "MAD",     
         "departureDate": "2016-10-20T00:00:00"
       }
     }
