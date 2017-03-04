@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>flymatcher-itinerary-service</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.2</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
