@@ -16,7 +16,6 @@
 		<skyscanner-adaptor-api.version>1.0.9</skyscanner-adaptor-api.version>
 		<flymatcher-error-api.version>1.0.2</flymatcher-error-api.version>
 		<flymatcher-itinerary-api.version>1.0.7</flymatcher-itinerary-api.version>
-
 	</properties>
 
 	<dependencies>
