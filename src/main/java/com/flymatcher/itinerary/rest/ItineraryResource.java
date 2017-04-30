@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flymatcher.itinerary.FlightMatch;
-import com.flymatcher.itinerary.service.ItineraryService;
+import com.flymatcher.itinerary.service.CheapestFlightsAggregator;
 
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -21,10 +21,10 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 public class ItineraryResource {
 
-  private final ItineraryService itineraryService;
+  private final CheapestFlightsAggregator itineraryService;
 
   @Autowired
-  public ItineraryResource(final ItineraryService itineraryService) {
+  public ItineraryResource(final CheapestFlightsAggregator itineraryService) {
     this.itineraryService = itineraryService;
   }
 

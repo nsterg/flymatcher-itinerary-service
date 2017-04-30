@@ -17,12 +17,12 @@ import org.springframework.http.ResponseEntity;
 
 import com.flymatcher.itinerary.FlightMatch;
 import com.flymatcher.itinerary.domain.ItineraryRequest;
-import com.flymatcher.itinerary.service.ItineraryService;
+import com.flymatcher.itinerary.service.CheapestFlightsAggregator;
 
 public class ItineraryResourceTest {
 
   @Mock
-  private ItineraryService mockItineraryService;
+  private CheapestFlightsAggregator mockItineraryService;
 
   private ItineraryResource resource;
 

@@ -5,7 +5,7 @@ import java.util.List;
 import com.flymatcher.itinerary.FlightMatch;
 import com.flymatcher.itinerary.domain.ItineraryRequest;
 
-public interface ItineraryService {
+public interface CheapestFlightsAggregator {
 
   List<FlightMatch> findFlightMatches(final ItineraryRequest itineraryRequest);
 

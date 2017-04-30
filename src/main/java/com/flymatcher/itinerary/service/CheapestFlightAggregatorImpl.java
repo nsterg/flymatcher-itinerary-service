@@ -1,7 +1,9 @@
 package com.flymatcher.itinerary.service;
 
 import static java.lang.Double.compare;
+import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.concat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,24 +27,84 @@ import com.flymatcher.skyscanner.adaptor.api.SkyscannerCheapestQuotesResponse;
 import com.flymatcher.skyscanner.adaptor.api.SkyscannerQuote;
 
 @Component
-public class ItineraryServiceImpl implements ItineraryService {
+public class CheapestFlightAggregatorImpl implements CheapestFlightsAggregator {
 
   private final SkyscannerAdaptorClient skyscannerAdaptorClient;
   private final ItineraryRequestTransformer transformer;
-  private final List<String> countries;
+  private final Integer cheapestCountriesNum;
 
   @Autowired
-  public ItineraryServiceImpl(final SkyscannerAdaptorClient skyscannerAdaptorClient,
+  public CheapestFlightAggregatorImpl(final SkyscannerAdaptorClient skyscannerAdaptorClient,
       final ItineraryRequestTransformer transformer,
-      @Value("#{'${skyscanner.european.airports}'.split(',')}") final List<String> countries) {
+      @Value("${cheapest.countries.num}") final Integer cheapestCountriesNum) {
     this.skyscannerAdaptorClient = skyscannerAdaptorClient;
     this.transformer = transformer;
-    this.countries = countries;
+    this.cheapestCountriesNum = cheapestCountriesNum;
   }
 
   @Override
   public List<FlightMatch> findFlightMatches(final ItineraryRequest itineraryRequest) {
 
+
+    final List<SkyscannerCheapestQuotesResponse> cheapestQuotesResponses =
+        getCheapestQuotesResponses(itineraryRequest, singletonList("anywhere"));
+    final List<FlightMatch> initialMatches = findFlightMatches(cheapestQuotesResponses);
+
+    final List<String> cheapestCountries =
+        findCheapestCountries(cheapestQuotesResponses, initialMatches);
+
+    final List<FlightMatch> moreMatches =
+        findFlightMatches(getCheapestQuotesResponses(itineraryRequest, cheapestCountries));
+
+    return aggregateMatches(initialMatches, moreMatches);
+
+  }
+
+
+  private List<FlightMatch> aggregateMatches(final List<FlightMatch> initialMatches,
+      final List<FlightMatch> moreMatches) {
+    return concat(initialMatches.stream(), moreMatches.stream())
+        .sorted((f1, f2) -> compare(f1.getPrice(), f2.getPrice())).collect(toList());
+  }
+
+  private List<String> findCheapestCountries(
+      final List<SkyscannerCheapestQuotesResponse> cheapestQuotesResponses,
+      final List<FlightMatch> initialMatches) {
+
+    final List<SkyscannerQuote> skyscannerQuote = new ArrayList<>();
+
+    cheapestQuotesResponses.forEach(r -> {
+      skyscannerQuote.addAll(r.getQuotes());
+    });
+
+
+    final Map<String, Double> flightMatchMap = new HashMap<>();
+    skyscannerQuote.forEach(q -> {
+
+      final String country = q.getOutboundLeg().getCountry();
+      final String countryCode = q.getOutboundLeg().getCountryCode();
+
+      if (initialMatches.stream().filter(p -> p.getCountry().equals(country)).count() == 0) {
+        final Double price = flightMatchMap.get(country);
+
+        if (price == null) {
+          flightMatchMap.put(countryCode, q.getPrice());
+        } else {
+          flightMatchMap.put(countryCode, q.getPrice() + price);
+
+        }
+      }
+
+    });
+
+    return flightMatchMap.entrySet().stream().sorted(Map.Entry.comparingByValue())
+        .limit(cheapestCountriesNum).map(Map.Entry::getKey).collect(Collectors.toList());
+  }
+
+
+
+  private List<SkyscannerCheapestQuotesResponse> getCheapestQuotesResponses(
+      final ItineraryRequest itineraryRequest, final List<String> countries) {
     final List<SkyscannerCheapestQuotesResponse> cheapestQuotesResponses = new ArrayList<>();
 
     countries.forEach(c -> {
@@ -51,12 +114,10 @@ public class ItineraryServiceImpl implements ItineraryService {
 
       });
     });
-
-    return processFlightMatches(cheapestQuotesResponses);
-
+    return cheapestQuotesResponses;
   }
 
-  private List<FlightMatch> processFlightMatches(
+  private List<FlightMatch> findFlightMatches(
       final List<SkyscannerCheapestQuotesResponse> cheapestQuotesResponses) {
     final List<SkyscannerQuote> skyscannerQuote = new ArrayList<>();
 
@@ -84,8 +145,7 @@ public class ItineraryServiceImpl implements ItineraryService {
     });
 
     return flightMatchMap.values().stream()
-        .filter(n -> !matchingDestinations.add(n.getDestination()))
-        .sorted((f1, f2) -> compare(f1.getPrice(), f2.getPrice())).collect(toList());
+        .filter(n -> !matchingDestinations.add(n.getDestination())).collect(toList());
 
   }
 
@@ -99,7 +159,6 @@ public class ItineraryServiceImpl implements ItineraryService {
     final List<Route> routes = new ArrayList<>();
     routes.add(createRoute(q));
     fm.setRoutes(routes);
-    // fm.setAirportCode(q.getOutboundLeg().getAirportCode());
     fm.setCountry(q.getOutboundLeg().getCountry());
 
     return fm;
