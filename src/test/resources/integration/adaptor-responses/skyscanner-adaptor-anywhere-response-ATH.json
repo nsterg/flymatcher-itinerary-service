@@ -1,0 +1,105 @@
+{
+  "quotes": [
+    {
+      "price": 62.0,
+      "direct": true,
+      "quoteDate":"2016-08-06T22:01:00",
+      "outboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Athens International",
+        "destination": "Milan Malpensa",
+        "originCode": "ATH",
+        "destinationCode": "MIL",
+        "country":"Italy",          
+        "countryCode":"IT",          
+        "departureDate": "2016-10-10T00:00:00"
+      },
+      "inboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Milan Malpensa",
+        "destination": "Athens International",
+        "originCode": "MIL",
+        "destinationCode": "ATH",
+        "country":"Greece",          
+        "countryCode":"GR",   
+        "departureDate": "2016-10-20T00:00:00"
+      }
+    },
+    {
+      "price": 72.0,
+      "direct": true,
+      "quoteDate":"2016-08-06T22:01:00",
+      "outboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Athens International",
+        "destination": "Berlin",
+        "originCode": "ATH",
+        "destinationCode": "BRL",
+        "country":"Germany",          
+        "countryCode":"GE",          
+        "departureDate": "2016-10-10T00:00:00"
+      },
+      "inboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Berlin",
+        "destination": "Athens International",
+        "originCode": "BRL",
+        "destinationCode": "ATH",
+        "country":"Greece",          
+        "countryCode":"GR",   
+        "departureDate": "2016-10-20T00:00:00"
+      }
+    },
+    {
+      "price": 78.0,
+      "direct": true,
+      "quoteDate":"2016-08-06T22:01:00",
+      "outboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Athens International",
+        "destination": "Paris Charles de Gaulle",
+        "originCode": "ATH",
+        "destinationCode": "CDG",
+        "country":"France",          
+        "countryCode":"FR",          
+        "departureDate": "2016-10-10T00:00:00"
+      },
+      "inboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Paris Charles de Gaulle",
+        "destination": "Athens International",
+        "originCode": "CDG",
+        "destinationCode": "ATH",
+        "country":"Greece",          
+        "countryCode":"GR",   
+        "departureDate": "2016-10-20T00:00:00"
+      }
+    },
+    {
+      "price": 178.0,
+      "direct": true,
+      "quoteDate":"2016-08-06T22:01:00",
+      "outboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Athens International",
+        "destination": "London Gatwick",
+        "originCode": "ATH",
+        "destinationCode": "LDG",
+        "country":"United Kingdom",          
+        "countryCode":"UK",          
+        "departureDate": "2016-10-10T00:00:00"
+      },
+      "inboundLeg": {
+        "carrier": "easyJet",
+        "origin": "London Gatwick",
+        "destination": "Athens International",
+        "originCode": "LDG",
+        "destinationCode": "ATH",
+        "country":"Greece",          
+        "countryCode":"GR",   
+        "departureDate": "2016-10-20T00:00:00"
+      }
+    }
+        
+  ]
+}

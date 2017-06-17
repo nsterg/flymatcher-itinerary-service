@@ -1,0 +1,105 @@
+{
+  "quotes": [
+    {
+      "price": 38.0,
+      "direct": true,
+      "quoteDate":"2016-08-06T22:01:00",
+      "outboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Madrid",
+        "destination": "Milan Malpensa",
+        "originCode": "MAD",
+        "destinationCode": "MIL", 
+        "country":"Italy",          
+        "countryCode":"IT",               
+        "departureDate": "2016-10-10T00:00:00"
+      },
+      "inboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Milan Malpensa",
+        "destination": "Madrid",
+        "originCode": "MIL",
+        "destinationCode": "MAD",
+        "country":"Spain",          
+        "countryCode":"ES",             
+        "departureDate": "2016-10-20T00:00:00"
+      }
+    },
+    {
+      "price": 48.0,
+      "direct": true,
+      "quoteDate":"2016-08-06T22:01:00",
+      "outboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Madrid",
+        "destination": "Berlin",
+        "originCode": "MAD",
+        "destinationCode": "BRL",
+        "country":"Germany",          
+        "countryCode":"GE",          
+        "departureDate": "2016-10-10T00:00:00"
+      },
+      "inboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Berlin",
+        "destination": "Madrid",
+        "originCode": "BRL",
+        "destinationCode": "MAD",
+        "country":"Spain",          
+        "countryCode":"ES",   
+        "departureDate": "2016-10-20T00:00:00"
+      }
+    },
+    {
+      "price": 78.0,
+      "direct": true,
+      "quoteDate":"2016-08-06T22:01:00",
+      "outboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Madrid",
+        "destination": "Marseille",
+        "originCode": "MAD",
+        "destinationCode": "MRS",
+        "country":"France",          
+        "countryCode":"FR",          
+        "departureDate": "2016-10-10T00:00:00"
+      },
+      "inboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Marseille",
+        "destination": "Madrid",
+        "originCode": "MRS",
+        "destinationCode": "MAD",
+        "country":"Spain",          
+        "countryCode":"ES",   
+        "departureDate": "2016-10-20T00:00:00"
+      }
+    },
+    {
+      "price": 278.0,
+      "direct": true,
+      "quoteDate":"2016-08-06T22:01:00",
+      "outboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Madrid",
+        "destination": "London Heathrow",
+        "originCode": "MAD",
+        "destinationCode": "LHR",
+        "country":"United Kingdom",          
+        "countryCode":"UK",          
+        "departureDate": "2016-10-10T00:00:00"
+      },
+      "inboundLeg": {
+        "carrier": "easyJet",
+        "origin": "London Heathrow",
+        "destination": "Madrid",
+        "originCode": "LHR",
+        "destinationCode": "MAD",
+        "country":"Spain",          
+        "countryCode":"ES",   
+        "departureDate": "2016-10-20T00:00:00"
+      }
+    }
+        
+  ]
+}

@@ -53,34 +53,39 @@ public class ItinerariesResourceIntegrationTest {
   @Test
   public void shouldReturnFlightMatchesResponse() throws IOException {
 
-    final String skyscannerAdaptorResponse1 = readFileToString(new File(
-        "src/test/resources/integration/adaptor-responses/skyscanner-adaptor-response-1.json"));
-    final String skyscannerAdaptorResponse2 = readFileToString(new File(
-        "src/test/resources/integration/adaptor-responses/skyscanner-adaptor-response-2.json"));
-    final String skyscannerAdaptorResponse3 = readFileToString(new File(
-        "src/test/resources/integration/adaptor-responses/skyscanner-adaptor-response-3.json"));
-    final String skyscannerAdaptorResponse4 = readFileToString(new File(
-        "src/test/resources/integration/adaptor-responses/skyscanner-adaptor-response-4.json"));
+    final String skyscannerAdaptorAnywhereResponseATH = readFileToString(new File(
+        "src/test/resources/integration/adaptor-responses/skyscanner-adaptor-anywhere-response-ATH.json"));
+    final String skyscannerAdaptorAnywhereResponseMAD = readFileToString(new File(
+        "src/test/resources/integration/adaptor-responses/skyscanner-adaptor-anywhere-response-MAD.json"));
+
+    final String skyscannerAdaptorResponseAthFR = readFileToString(new File(
+        "src/test/resources/integration/adaptor-responses/skyscanner-adaptor-response-ATH-FR.json"));
+    final String skyscannerAdaptorResponseMadFR = readFileToString(new File(
+        "src/test/resources/integration/adaptor-responses/skyscanner-adaptor-response-MAD-FR.json"));
+
+
 
     driver.addExpectation(
-        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/ATH/IT/2016-10-10/2016-10-20").withMethod(
-            GET),
-        giveResponse(skyscannerAdaptorResponse1, "application/json").withStatus(200));
-
+        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/ATH/anywhere/2016-10-10/2016-10-20")
+            .withMethod(GET),
+        giveResponse(skyscannerAdaptorAnywhereResponseATH, "application/json").withStatus(200));
     driver.addExpectation(
-        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/MAD/IT/2016-10-10/2016-10-20").withMethod(
-            GET),
-        giveResponse(skyscannerAdaptorResponse2, "application/json").withStatus(200));
+        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/MAD/anywhere/2016-10-10/2016-10-20")
+            .withMethod(GET),
+        giveResponse(skyscannerAdaptorAnywhereResponseMAD, "application/json").withStatus(200));
 
-    driver.addExpectation(
-        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/ATH/FR/2016-10-10/2016-10-20").withMethod(
-            GET),
-        giveResponse(skyscannerAdaptorResponse3, "application/json").withStatus(200));
+    driver
+        .addExpectation(
+            onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/ATH/FR/2016-10-10/2016-10-20")
+                .withMethod(GET),
+            giveResponse(skyscannerAdaptorResponseAthFR, "application/json").withStatus(200));
 
-    driver.addExpectation(
-        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/MAD/FR/2016-10-10/2016-10-20").withMethod(
-            GET),
-        giveResponse(skyscannerAdaptorResponse4, "application/json").withStatus(200));
+    driver
+        .addExpectation(
+            onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/MAD/FR/2016-10-10/2016-10-20")
+                .withMethod(GET),
+            giveResponse(skyscannerAdaptorResponseMadFR, "application/json").withStatus(200));
+
 
     // @formatter:off
     given()
@@ -122,8 +127,8 @@ public class ItinerariesResourceIntegrationTest {
         "src/test/resources/integration/adaptor-responses/skyscanner-adaptor-400-response.json"));
 
     driver.addExpectation(
-        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/ATH/IT/2016-10-10/2016-10-20").withMethod(
-            GET),
+        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/ATH/anywhere/2016-10-10/2016-10-20")
+            .withMethod(GET),
         giveResponse(skyscannerAdaptorResponse, "application/json").withStatus(400));
 
     // @formatter:off
@@ -146,7 +151,7 @@ public class ItinerariesResourceIntegrationTest {
       throws IOException {
 
     driver.addExpectation(
-        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/ATH/IT/2016-10-10/2016-10-20")
+        onRequestTo("/v1/cheapest-quotes/GR/EUR/en-GB/ATH/anywhere/2016-10-10/2016-10-20")
             .withMethod(GET),
         giveResponse("<html>Some nexpected error</html>", "application/json").withStatus(500));
 
@@ -171,7 +176,7 @@ public class ItinerariesResourceIntegrationTest {
     map.put("market", "GR");
     map.put("currency", "EUR");
     map.put("locale", "en-GB");
-    map.put("origins", "ATH,MAD");
+    map.put("origins", "ATH, MAD");
     map.put("outboundDate", "2016-10-10");
     map.put("inboundDate", "2016-10-20");
 

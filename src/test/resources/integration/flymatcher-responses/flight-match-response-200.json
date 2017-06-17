@@ -23,6 +23,29 @@
       "inboundDate":"2016-10-20"
    },
    {  
+      "destination":"Berlin",
+      "routes":[  
+         {  
+            "originAirport":"Madrid",
+            "destinationAirport":"Berlin",
+            "originAirportCode":"MAD",
+            "destinationAirportCode":"BRL",            
+            "price":48.0
+         },
+         {  
+            "originAirport":"Athens International",
+            "destinationAirport":"Berlin",         
+            "originAirportCode":"ATH",
+            "destinationAirportCode":"BRL",
+            "price":72.0
+         }
+      ],
+      "country":"Germany",
+      "price":120.0,
+      "outboundDate":"2016-10-10",
+      "inboundDate":"2016-10-20"
+   },
+   {  
       "destination":"Paris Charles de Gaulle",
       "routes":[  
          {  

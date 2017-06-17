@@ -1,0 +1,54 @@
+{
+  "quotes": [
+    {
+      "price": 78.0,
+      "direct": true,
+      "quoteDate":"2016-08-06T22:01:00",
+      "outboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Madrid",
+        "destination": "Paris Charles de Gaulle",
+        "country": "France",
+        "originCode": "MAD",
+        "destinationCode": "CDG", 
+        "countryCode":"FR",               
+        "departureDate": "2016-10-10T00:00:00"
+      },
+      "inboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Paris Charles de Gaulle",
+        "destination": "Madrid",
+        "originCode": "CDG",
+        "destinationCode": "MAD",
+        "country":"Spain",          
+        "countryCode":"ES",             
+        "departureDate": "2016-10-20T00:00:00"
+      }
+    },
+    {
+      "price": 372.0,
+      "direct": true,
+      "quoteDate":"2016-08-06T22:01:00",
+      "outboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Madrid",
+        "destination": "Lille",
+        "country": "France",
+        "originCode": "MAD",
+        "destinationCode": "LIL", 
+        "countryCode":"FR",               
+        "departureDate": "2016-10-10T00:00:00"
+      },
+      "inboundLeg": {
+        "carrier": "easyJet",
+        "origin": "Lille",
+        "destination": "Madrid",
+        "originCode": "LIL",
+        "destinationCode": "MAD",
+        "country":"Spain",          
+        "countryCode":"ES",             
+        "departureDate": "2016-10-20T00:00:00"
+      }
+    }    
+  ]
+}
